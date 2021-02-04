@@ -1,0 +1,12 @@
+{
+  "name": "SwipeExample",
+  "displayName": "SwipeExample",
+  "expo": {
+    "name": "SwipeExample",
+    "slug": "SwipeExample",
+    "version": "1.0.0",
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
