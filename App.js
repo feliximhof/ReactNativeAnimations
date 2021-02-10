@@ -1,21 +1,46 @@
-import { StatusBar } from 'expo-status-bar';
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Text, View, Dimensions } from "react-native";
+import "react-native-gesture-handler";
+import React from "react";
+import { NavigationContainer } from "@react-navigation/native";
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
-    </View>
-  );
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import SwipeContainer from "./Swipe/SwipeContainer";
+import StoryContainer from "./Storys/StoryContainer";
+
+const { width, height } = Dimensions.get("window");
+
+function HomeScreen() {
+	return (
+		<View
+			style={{
+				width: width,
+				height: height,
+				justifyContent: "center",
+				alignItems: "center",
+			}}
+		>
+			<SwipeContainer />
+		</View>
+	);
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
+function SettingsScreen() {
+	return (
+		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
+			<StoryContainer />
+		</View>
+	);
+}
+
+const Tab = createBottomTabNavigator();
+
+export default function App() {
+	return (
+		<NavigationContainer>
+			<Tab.Navigator>
+				<Tab.Screen name="Swipe" component={HomeScreen} />
+				<Tab.Screen name="Storys" component={SettingsScreen} />
+			</Tab.Navigator>
+		</NavigationContainer>
+	);
+}
