@@ -6,10 +6,26 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import SwipeContainer from "./Swipe/SwipeContainer";
 import StoryContainer from "./Storys/StoryContainer";
+import DragToSortContainer from "./DragToSort/DragToSortContainer";
 
 const { width, height } = Dimensions.get("window");
 
-function HomeScreen() {
+function DragToSort() {
+	return (
+		<View
+			style={{
+				width: width,
+				height: height,
+				justifyContent: "center",
+				alignItems: "center",
+			}}
+		>
+			<DragToSortContainer />
+		</View>
+	);
+}
+
+function Swipe() {
 	return (
 		<View
 			style={{
@@ -24,7 +40,7 @@ function HomeScreen() {
 	);
 }
 
-function SettingsScreen() {
+function Story() {
 	return (
 		<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
 			<StoryContainer />
@@ -38,8 +54,9 @@ export default function App() {
 	return (
 		<NavigationContainer>
 			<Tab.Navigator>
-				<Tab.Screen name="Swipe" component={HomeScreen} />
-				<Tab.Screen name="Storys" component={SettingsScreen} />
+				<Tab.Screen name="Swipe" component={Swipe} />
+				<Tab.Screen name="Storys" component={Story} />
+				<Tab.Screen name="DragToSort" component={DragToSort} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);
