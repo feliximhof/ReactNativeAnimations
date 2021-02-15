@@ -1,5 +1,6 @@
 import React from "react";
 import { View, SafeAreaView, StyleSheet, Dimensions, Text } from "react-native";
+import PropTypes from "prop-types";
 import Card from "./Card";
 import { PanGestureHandler, State } from "react-native-gesture-handler";
 import Animated from "react-native-reanimated";
@@ -119,6 +120,10 @@ export default class Profiles extends React.PureComponent {
 		this.init();
 	}
 
+	static PropTypes = {
+		images: PropTypes.shape({}).isRequired,
+	};
+
 	init = () => {
 		const clockX = new Clock();
 		const clockY = new Clock();
@@ -185,6 +190,7 @@ export default class Profiles extends React.PureComponent {
 
 	render() {
 		const { onGestureEvent, translateX, translateY } = this;
+		const { images } = this.props;
 		const {
 			ProfileData: [lastProfile, ...ProfileData],
 		} = this.state;
@@ -212,6 +218,7 @@ export default class Profiles extends React.PureComponent {
 			transform: [{ translateX }, { translateY }, { rotateZ }],
 		};
 
+		console.warn();
 		return (
 			<SafeAreaView style={styles.container}>
 				<View
@@ -227,17 +234,16 @@ export default class Profiles extends React.PureComponent {
 					</View>
 					{ProfileData.length >= 1 ? (
 						<>
-							{ProfileData.reverse().map((items, index) => {
+							{images.reverse().map((items, index) => {
 								return <Card key={items.id} items={items} />;
 							})}
-
 							<PanGestureHandler
 								onHandlerStateChange={onGestureEvent}
 								onGestureEvent={onGestureEvent}
 							>
 								<Animated.View style={style}>
 									<Card
-										items={lastProfile}
+										items={images[1]}
 										saveOpacity={likeOpacity}
 										dontSaveOpacity={nopeOpacity}
 									/>
@@ -260,6 +266,19 @@ export default class Profiles extends React.PureComponent {
 		);
 	}
 }
+
+/**	<PanGestureHandler
+								onHandlerStateChange={onGestureEvent}
+								onGestureEvent={onGestureEvent}
+							>
+								<Animated.View style={style}>
+									<Card
+										items={}
+										saveOpacity={likeOpacity}
+										dontSaveOpacity={nopeOpacity}
+									/>
+								</Animated.View>
+							</PanGestureHandler> */
 
 const styles = StyleSheet.create({
 	container: {

@@ -19,7 +19,7 @@ const Card = ({ items, saveOpacity, dontSaveOpacity }) => {
 					borderRadius: 20,
 				}}
 			>
-				<Image style={styles.image} source={items.background} />
+				<Image style={styles.image} source={{ uri: items.src.original }} />
 				<Animated.View style={[{ opacity: dontSaveOpacity }]}>
 					<Text style={styles.text1}>Don't Save</Text>
 				</Animated.View>
@@ -57,9 +57,9 @@ const styles = StyleSheet.create({
 	},
 	image: {
 		...StyleSheet.absoluteFillObject,
-		width: null,
 		height: null,
-		borderRadius: 5,
+		width: null,
+		borderRadius: 10,
 	},
 });
 

@@ -2,10 +2,10 @@ import { StyleSheet, View } from "react-native";
 import Profiles from "./Profiles";
 import React from "react";
 
-export default SwipeContainer = () => {
+export default SwipeContainer = ({ images }) => {
 	return (
 		<View style={styles.container}>
-			<Profiles />
+			<Profiles images={images} />
 		</View>
 	);
 };
