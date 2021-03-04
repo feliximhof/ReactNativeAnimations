@@ -4,11 +4,15 @@ import React, { useState, useEffect } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "react-navigation-stack";
+
 import SwipeContainer from "./Swipe/SwipeContainer";
 import StoryContainer from "./Storys/StoryContainer";
 import DragToSortContainer from "./DragToSort/DragToSortContainer";
 import FlatListExampleContainer from "./FlatListExample/FlatListExampleContainer";
 import ScrollViewExampleContainer from "./AnimatedScrollView/ScrollViewExampleContainer";
+import Overview from "./SharedElementTransition/Overview";
+import Details from "./SharedElementTransition/Details";
 
 import { API_KEY } from "./config";
 
@@ -27,22 +31,8 @@ const fetchImagesFromPexels = async () => {
 	return photos;
 };
 
-function DragToSort() {
-	return (
-		<View
-			style={{
-				width: width,
-				height: height,
-				justifyContent: "center",
-				alignItems: "center",
-			}}
-		>
-			<DragToSortContainer />
-		</View>
-	);
-}
-
 const Tab = createBottomTabNavigator();
+const Stack = createStackNavigator();
 
 export default function App() {
 	const [images, setImages] = useState(null);
@@ -77,7 +67,7 @@ export default function App() {
 	const Story = () => {
 		return (
 			<View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-				<StoryContainer />
+				<StoryContainer images={images} />
 			</View>
 		);
 	};
@@ -98,6 +88,32 @@ export default function App() {
 		);
 	};
 
+	const Screen1 = () => {
+		return (
+			<View style={{ flex: 1 }}>
+				<Overview images={images} />
+			</View>
+		);
+	};
+
+	const Screen2 = () => {
+		return (
+			<View style={{ flex: 1 }}>
+				<Details />
+			</View>
+		);
+	};
+
+	const SharedElementTransition = createStackNavigator(
+		{
+			Overview: Screen1,
+			Details: Screen2,
+		},
+		{
+			initialRouteName: "Overview",
+		}
+	);
+
 	return (
 		<NavigationContainer>
 			<Tab.Navigator>
@@ -105,6 +121,7 @@ export default function App() {
 				<Tab.Screen name="Storys" component={Story} />
 				<Tab.Screen name="FlatList" component={FlatListExample} />
 				<Tab.Screen name="ScrollAnim" component={ScrollViewExample} />
+				<Tab.Screen name="Shared" component={SharedElementTransition} />
 			</Tab.Navigator>
 		</NavigationContainer>
 	);

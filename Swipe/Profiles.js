@@ -36,22 +36,18 @@ const ProfileData = [
 	{
 		id: 1,
 		name: "Card 1",
-		background: require("../Storys/assets/stories/1.jpg"),
 	},
 	{
 		id: 2,
 		name: "Card 2",
-		background: require("../Storys/assets/stories/2.jpg"),
 	},
 	{
 		id: 3,
 		name: "Card 3",
-		background: require("../Storys/assets/stories/3.jpg"),
 	},
 	{
 		id: 4,
 		name: "Card 4",
-		background: require("../Storys/assets/stories/4.jpg"),
 	},
 ];
 
